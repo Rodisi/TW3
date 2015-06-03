@@ -8,11 +8,18 @@
         #content {
             padding: 0 !important;
         }
+		
+
+    </style>
     </style>  
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>    
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>   
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=places""></script>   
     <script>
+		var map;
+		var infowindow;
         $(document).on('pageshow', '#index',function(e,data){
 			
 			
@@ -21,14 +28,16 @@
             $('#content').height(getRealContentHeight());
              
            // This is the minimum zoom level that we'll allow
-           var minZoomLevel = 12;
+           var minZoomLevel = 16;
 		   
  
-           var map = new google.maps.Map(document.getElementById('map_canvas'), {
+			  map = new google.maps.Map(document.getElementById('map_canvas'), {
               zoom: minZoomLevel,
               center: new google.maps.LatLng(38.50, -90.50),
               mapTypeId: google.maps.MapTypeId.ROADMAP
            });
+			
+			
 			var latlng = new google.maps.LatLng(lat,lon);
 			function sucesso(pos) {
 				var lat= pos.coords.latitude;
@@ -37,23 +46,40 @@
 				var alt= pos.coords.altitude;
 				var altacc= pos.coords.altitudeAccuracy;
 				
-				var geocoder = new google.maps.Geocoder();
+				var request = {
+				location: latlng = new google.maps.LatLng(lat,lon),
+				radius: 500
+				};
 				$("#lat").val(lat);
 				$("#lon").val(lon);
-				latlng = new google.maps.LatLng(lat,lon);
+				
 				map.setCenter(latlng);
-				geocoder.geocode({'latLng': latlng}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					if (results[0]) {
-					$("#local").val(results[0].formatted_address);
-					} else {
-					alert('No results found');
-				}
-				} else {
-				alert('Geocoder failed due to: ' + status);
-				}
-			});
+				infowindow = new google.maps.InfoWindow();
+				var service = new google.maps.places.PlacesService(map);
+				service.nearbySearch(request, callback);
+				function callback(results, status) {
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+					//("#local").val(results[0].name);
+					for (var i = 0; i < results.length; i++) {
+					createMarker(results[i]);
+							}
+						}
+					}
+				function createMarker(place) {
+				var placeLoc = place.geometry.location;
+			  var marker = new google.maps.Marker({
+				map: map,
+				position: place.geometry.location
+			  });
+
+			  google.maps.event.addListener(marker, 'click', function() {
+				infowindow.setContent(place.name);
+				infowindow.open(map, this);
+				$("#local").val(place.name);
+			  });
+}
 			}
+			
 
 
 
@@ -90,7 +116,7 @@
         </div>
  
         <div data-role="content" id="content">
-            <div id="map_canvas" style="height:30%"></div>
+            <div id="map_canvas" style="height:50%"></div>
 			<form action="envia.php" data-ajax="false">
 		<p><label>Lat</label><input type="text" name="lat" id="lat"></p>
 		<p><label>Lon</label><input type="text" name="lon" id="lon"></p>
