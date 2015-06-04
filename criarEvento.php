@@ -7,11 +7,12 @@
     <style>
         #content {
             padding: 0 !important;
+			
         }
 		
-
+		
     </style>
-    </style>  
+	
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -20,6 +21,8 @@
     <script>
 		var map;
 		var infowindow;
+		
+
         $(document).on('pageshow', '#index',function(e,data){
 			
 			
@@ -116,15 +119,17 @@
         </div>
  
         <div data-role="content" id="content">
-            <div id="map_canvas" style="height:50%"></div>
-			<form action="envia.php" data-ajax="false">
+				<form action="envia.php" data-role="collapsible" data-ajax="false" id="over_map">
+			 <h3>Dados evento</h3>
 		<p><label>Lat</label><input type="text" name="lat" id="lat"></p>
 		<p><label>Lon</label><input type="text" name="lon" id="lon"></p>
 		<p><label>Local</label><input type="text" name="local" id="local"></p>
 		<p><input type="submit" value="GRAVAR"></p>
 	
-	</form>
+		</form>
 			
+            <div id="map_canvas" style="height:90%"></div>
+		
         </div>
 		
 		
