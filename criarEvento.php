@@ -147,13 +147,27 @@
       <div data-role="content" id="content">
         <form action="envia.php" data-role="collapsible" data-ajax="false" id="over_map">
           <h3>Dados evento</h3>
-          <p>
-            <label>Lat</label>
-            <input type="text" name="lat" id="lat">
+		  <p>
+            <label>Nome Evento</label>
+            <input type="text" name="nomeEvento" id="nomeEvento">
+          </p>
+		  <p>
+            <label>data</label>
+            <input type="text" data-role="date" data-inline="true" name="data" id="data">
+          </p>
+		  <p>
+            <label>Hora</label>
+            <input type="text" name="hora" id="hora">
+          </p>
+		  <p>
+            <label>Descricao</label>
+            <input type="text" name="descricao" id="descricao">
           </p>
           <p>
-            <label>Lon</label>
-            <input type="text" name="lon" id="lon">
+            <input type="hidden" name="lat" id="lat">
+          </p>
+          <p>
+            <input type="hidden" name="lon" id="lon">
           </p>
           <p>
             <label>Local</label>
