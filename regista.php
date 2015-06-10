@@ -19,7 +19,7 @@ if (isset($_POST['nome'])&&isset($_POST['email'])&&isset($_POST['pass'])){
 	
 	if($num_rows==0){
 	
-	$sql="INSERT INTO user (Nome, email, Password) VALUES ('$nome','$email','$password')";
+	$sql="INSERT INTO user (nome, email, pass) VALUES ('$nome','$email','$password')";
 	$result =mysqli_query($link, $sql);
 	header("Location: index.php");
 	}else{

@@ -13,7 +13,7 @@
         <h3> UE </h3>
       </div>
       <div data-role="content" id="content">
-        <form action="regista.php" data-ajax="false">
+        <form action="regista.php" method="post" data-ajax="false">
           <h3>Registo</h3>
 		  <p>
             <label>Nome</label>

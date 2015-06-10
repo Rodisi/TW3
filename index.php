@@ -13,7 +13,7 @@
         <h3> Login </h3>
       </div>
       <div data-role="content" id="content">
-        <form action="login.php" data-ajax="false">
+        <form action="login.php" method="post" data-ajax="false">
           <h3>Login</h3>
           <p>
             <label>Email</label>

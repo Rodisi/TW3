@@ -10,7 +10,7 @@ session_start();
 	
 	include 'config.php';
 	
-	$sql="Select UserID, email, password FROM user where email='$username' AND password='$password'";
+	$sql="Select userid, email, pass FROM user where email='$username' AND pass='$password'";
 	
 	$result=mysqli_query($link, $sql);
 	
@@ -20,7 +20,7 @@ session_start();
 	if ($row_cnt>0){
 		
 		while($row = mysqli_fetch_array($result)) {
-		$user_id=$row['UserID'];
+		$user_id=$row['userid'];
 		$_SESSION['user_id'] = $user_id;
 		}
 		
