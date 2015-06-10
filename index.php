@@ -13,19 +13,20 @@
         <h3> Login </h3>
       </div>
       <div data-role="content" id="content">
-        <form action="envia.php" data-ajax="false">
+        <form action="login.php" data-ajax="false">
           <h3>Login</h3>
           <p>
             <label>Email</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="username" id="username">
           </p>
           <p>
             <label>Password</label>
-            <input type="password" name="pass" id="pass">
+            <input type="password" name="password" id="password">
           </p>
-            <input type="submit" data-role="button" value="LOGIN">
+            <input type="submit" data-role="button" data-inline="true" value="LOGIN">
           </p>
         </form>
+		<p><a href="registo.php" data-role="button" data-inline="true" data-ajax="false">registrar</a></p>
       </div>
       <div data-theme="a" data-role="footer" data-position="fixed">
         <h3> UE </h3>
