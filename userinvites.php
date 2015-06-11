@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php session_start(); 
+
+include 'config.php'; 
+
+
+	if(isset($_SESSION['user_id'])){
+	
+	$user_id=$_SESSION['user_id'];
+?>
+
 <html>
     <head>
     <title>Meus convites</title>
