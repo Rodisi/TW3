@@ -12,6 +12,7 @@
       <div  data-role="header">
         <h3> Meus eventos</h3>
       </div>
+	  <p><a href="criarEvento.php" data-role="button" data-inline="true" data-ajax="false">criar novo Evento</a></p>
       <ul data-role="listview" data-inset="true" data-ajax="false">
       <li>
         <a href="enventdetails.php">

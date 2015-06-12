@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<?php session_start(); 
+
+include 'config.php'; 
+
+if(isset($_SESSION['user_id'])){
+	
+	$user_id=$_SESSION['user_id'];
+}else{
+	header("Location: index.php?err=1");
+}
+?>
 <html>
     <head>
     <title>Criar evento</title>
@@ -145,7 +156,7 @@
         <h3> UE </h3>
       </div>
       <div data-role="content" id="content">
-        <form action="envia.php" data-role="collapsible" data-ajax="false" id="over_map">
+        <form action="criaevento.php" method="post" data-role="collapsible" data-ajax="false" id="over_map">
           <h3>Dados evento</h3>
 		  <p>
             <label>Nome Evento</label>
@@ -153,11 +164,11 @@
           </p>
 		  <p>
             <label>data</label>
-            <input type="text" data-role="date" data-inline="true" name="data" id="data">
+            <input type="date" data-role="date" data-inline="true" name="data" id="data">
           </p>
 		  <p>
             <label>Hora</label>
-            <input type="text" name="hora" id="hora">
+            <input type="time" name="hora" id="hora">
           </p>
 		  <p>
             <label>Descricao</label>
