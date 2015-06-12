@@ -6,6 +6,7 @@ include 'config.php';
 if(isset($_SESSION['user_id'])){
 	
 	$user_id=$_SESSION['user_id'];
+	
 }else{
 	header("Location: index.php?err=1");
 }
@@ -22,8 +23,6 @@ if(isset($_SESSION['user_id'])){
 </style>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=places""></script>
     <script>
 		var map;
@@ -153,7 +152,8 @@ if(isset($_SESSION['user_id'])){
     <body>
     <div data-role="page" id="index">
       <div data-theme="a" data-role="header">
-        <h3> UE </h3>
+        <h3> Criar Evento </h3>
+		<?php include "session_nav.php"; ?>
       </div>
       <div data-role="content" id="content">
         <form action="criaevento.php" method="post" data-role="collapsible" data-ajax="false" id="over_map">

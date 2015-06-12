@@ -75,7 +75,8 @@
     <body>
     <div data-role="page" id="index">
       <div data-theme="a" data-role="header">
-        <h3> UE </h3>
+        <h3> Detalhes </h3>
+		<?php include "session_nav.php"; ?>
       </div>
       <div data-role="content" id="content">
         <div >

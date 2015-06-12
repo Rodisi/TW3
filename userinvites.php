@@ -7,6 +7,7 @@ include 'config.php';
 	if(isset($_SESSION['user_id'])){
 	
 	$user_id=$_SESSION['user_id'];
+	}
 ?>
 
 <html>
@@ -21,6 +22,7 @@ include 'config.php';
 	
       <div  data-role="header">
         <h3> Convites</h3>
+		<?php include "session_nav.php"; ?>
       </div>
       <ul data-role="listview" data-inset="true" data-ajax="false">
       <li>

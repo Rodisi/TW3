@@ -11,6 +11,7 @@
 	
       <div  data-role="header">
         <h3> Meus eventos</h3>
+		<?php include "session_nav.php"; ?>
       </div>
 	  <p><a href="criarEvento.php" data-role="button" data-inline="true" data-ajax="false">criar novo Evento</a></p>
       <ul data-role="listview" data-inset="true" data-ajax="false">
