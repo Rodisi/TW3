@@ -40,9 +40,9 @@ if(isset($_SESSION['user_id'])){
 			
 			while($row = mysqli_fetch_array($result)){
 				echo'<li>';
-						echo'<a href="eventdetails.php" data-ajax="false">';
-						echo'<h2>'.$row['nome']; echo' </h2>';
-						echo'<h2>'.$row['local']; echo' </h2>';
+						echo'<a href="eventdetails.php/eventid='.$row['eventid'].'" data-ajax="false">';
+						echo'<h2>'.$row['nome'].' </h2>';
+						echo'<h2>'.$row['local'].' </h2>';
 						echo'</a>';
 					echo'</li>';
 			}
