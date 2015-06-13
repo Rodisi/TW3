@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php session_start(); 
+
+include 'config.php'; 
+
+if(isset($_SESSION['user_id'])){
+	
+	$user_id=$_SESSION['user_id'];
+	
+}else{
+	header("Location: index.php?err=1");
+}
+?>
 <html>
     <head>
     <title>Meus eventos</title>
@@ -14,20 +26,31 @@
 		<?php include "session_nav.php"; ?>
       </div>
 	  <p><a href="criarEvento.php" data-role="button" data-inline="true" data-ajax="false">criar novo Evento</a></p>
-      <ul data-role="listview" data-inset="true" data-ajax="false">
-      <li>
-        <a href="enventdetails.php">
-        <h2>Nome Evento 1</h2>
-		<h3>local evento 1</h3>
-        </a>
-      </li>
-      <li>
-        <a href="enventdetails.php">
-        <h2>nome envento 2</h2>
-		<h3>local evento 2</h3>
-        </a>
-      </li>
-    </ul>
+      
+	  <?php
+		$user_id=$_SESSION['user_id'];
+		$sql="SELECT * from evento where userid='$user_id' ORDER BY data ASC";
+
+		$result = mysqli_query($link, $sql);
+	
+		$num_rows= mysqli_num_rows($result);	
+		
+		if ($num_rows>0){
+			echo '<ul data-role="listview" data-inset="true" data-ajax="false">';
+			
+			while($row = mysqli_fetch_array($result)){
+				echo'<li>';
+						echo'<a href="eventdetails.php" data-ajax="false">';
+						echo'<h2>'.$row['nome']; echo' </h2>';
+						echo'<h2>'.$row['local']; echo' </h2>';
+						echo'</a>';
+					echo'</li>';
+			}
+			echo '</ul>';
+		}else{
+			echo'Não tem eventos criados';
+		}
+	  ?>
       <div data-theme="a" data-role="footer" data-position="fixed">
         <h3> UE </h3>
       </div>

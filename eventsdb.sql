@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2015 at 06:53 PM
+-- Generation Time: Jun 13, 2015 at 03:45 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -52,7 +52,17 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `lat` varchar(32) NOT NULL,
   `lon` varchar(32) NOT NULL,
   PRIMARY KEY (`eventid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `evento`
+--
+
+INSERT INTO `evento` (`eventid`, `userid`, `nome`, `descricao`, `data`, `hora`, `local`, `lat`, `lon`) VALUES
+(1, 1, 'aaa', 'sas', '2015-11-12', '18:30', 'UAL - Universidade Autónoma de Lisboa', '38.724476', '-9.14570900000001'),
+(2, 1, 'dfdfdf', 'asfdasfdfdsf', '2015-06-26', '19:30', 'sasasasas', '38.722252399999995', '-9.1393366'),
+(3, 1, 'sasas', 'bvbvbv', '2016-12-11', '19:03', 'Energias de Portugal', '38.72592', '-9.149226999999996'),
+(4, 1, 'fgfgfg', 'hfhfhh', '2078-11-12', '20:11', 'Castle of S. Jorge', '38.713909', '-9.133475999999973');
 
 -- --------------------------------------------------------
 
@@ -66,7 +76,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(80) NOT NULL,
   `pass` varchar(32) NOT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`userid`, `nome`, `email`, `pass`) VALUES
+(1, 'bruno', 'brunomarques87@gmail.com', '121187');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
