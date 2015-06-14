@@ -1,15 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <?php session_start(); 
 
 include 'config.php'; 
 
-
-	if(isset($_SESSION['user_id'])){
+if(isset($_SESSION['user_id'])){
 	
 	$user_id=$_SESSION['user_id'];
-	}
+	
+}else{
+	header("Location: index.php?err=1");
+}
 ?>
-
 <html>
     <head>
     <title>Meus convites</title>
@@ -21,23 +22,42 @@ include 'config.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	
       <div  data-role="header">
-        <h3> Convites</h3>
+        <h3> Eventos para que fui convidado</h3>
 		<?php include "session_nav.php"; ?>
       </div>
-      <ul data-role="listview" data-inset="true" data-ajax="false">
-      <li>
-        <a href="enventdetails.php">
-        <h2>Nome Evento 1</h2>
-		<h3>local evento 1</h3>
-        </a>
-      </li>
-      <li>
-        <a href="enventdetails.php">
-        <h2>nome envento 2</h2>
-		<h3>local evento 2</h3>
-        </a>
-      </li>
-    </ul>
+      
+	  <?php
+		$user_id=$_SESSION['user_id'];
+		$sql="SELECT * FROM convite INNER JOIN user ON user.email = convite.email ORDER BY convite.eventid";
+
+		$result = mysqli_query($link, $sql);
+	
+		$num_rows= mysqli_num_rows($result);	
+		
+		if ($num_rows>0){
+			echo '<ul data-role="listview" data-inset="true" data-ajax="false">';
+			
+			while($row = mysqli_fetch_array($result)){
+				$evento=$row['eventid'];
+				$sql2="SELECT * from evento where eventid='$evento'";
+
+				$result2 = mysqli_query($link, $sql2);
+	
+				$row2 = mysqli_fetch_array($result2);
+				
+				echo'<li>';
+						echo'<a href="eventdetails.php?eventid='.$evento.'" data-ajax="false">';
+						echo'<h2>'.$row2['nome'].' </h2>';
+						echo'<h3>'.$row2['local'].' </h3>';
+						echo'<h3>'.$row['mensagem'].' </h3>';
+						echo'</a>';
+					echo'</li>';
+			}
+			echo '</ul>';
+		}else{
+			echo'Não foi convidado para nada';
+		}
+	  ?>
       <div data-theme="a" data-role="footer" data-position="fixed">
         <h3> UE </h3>
       </div>
