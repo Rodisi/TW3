@@ -25,64 +25,6 @@ if(isset($_SESSION['user_id'])){
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=places""></script>
-    <script>
-		var map;
-		var infowindow = new google.maps.InfoWindow();
-		var marker;
-		
-
-        $(document).on('pageshow', '#index',function(e,data){
-			
-			
-				
-         
-            $('#content').height(getRealContentHeight());
-             
-           // This is the minimum zoom level that we'll allow
-           var minZoomLevel = 16;
-		   
- 
-			  map = new google.maps.Map(document.getElementById('map_canvas'), {
-              zoom: minZoomLevel,
-              center: new google.maps.LatLng(38.50, -90.50),
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-           });
-		   
-			
-			
-			var latlng = new google.maps.LatLng(10,10);
-				
-				map.setCenter(latlng);
-				var marker = new google.maps.Marker({
-				position: latlng,
-				map: map,
-				title: 'Hello World!'
-				});
-				infowindow = new google.maps.InfoWindow();
-				});
-		
-			
-
-
-
-			
-
-
- 
-        function getRealContentHeight() {
-            var header = $.mobile.activePage.find("div[data-role='header']:visible");
-            var footer = $.mobile.activePage.find("div[data-role='footer']:visible");
-            var content = $.mobile.activePage.find("div[data-role='content']:visible:visible");
-            var viewport_height = $(window).height();
- 
-            var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
-            if((content.outerHeight() - header.outerHeight() - footer.outerHeight()) <= viewport_height) {
-                content_height -= (content.outerHeight() - content.height());
-            } 
-            return content_height;
-        }
-    </script>
     </head>
     <body>
     <div data-role="page" id="index">
@@ -91,31 +33,80 @@ if(isset($_SESSION['user_id'])){
 		<?php include "session_nav.php"; ?>
       </div>
       <div data-role="content" id="content">
-        <div >
-		<h3>Detalhes Evento</h3>
-		<p>Nome.</p>
-		<p>local.   </p>
-		<p><a href="http://maps.google.com/maps?q=35.128061,-106.535561&ll=35.126517,-106.535131&z=17" data-role="button" data-inline="true" data-ajax="false">Mostrar em google maps</a></p>
-		<p>hora.</p>
-		<p>descriçâo.</p>
-		<p><a href="index.html" data-role="button" data-inline="true" data-ajax="false">Vou</a>
-		<a href="index.html" data-role="button" data-inline="true" data-theme="b" data-ajax="false">Não vou</a></p>
-		<p><a href="criarEvento.php" data-role="button" data-inline="true" data-ajax="false">Editar Evento</a></p>
-		<a href="#popupBasic" data-rel="popup" data-role="button" data-inline="true">Convidar</a>
+		<?php 
+		$eventid = $_GET['eventid'];
+		//echo $eventid;
+		$sql="SELECT * from evento where eventid='$eventid'";
+		$result = mysqli_query($link, $sql);
+	
+		$num_rows= mysqli_num_rows($result);
+		if ($num_rows>0){
+			$row = mysqli_fetch_array($result);
+			echo'<h2>Detalhes Evento</h2>';
+			echo'<h2>'.$row['nome'].' </h2>';
+			echo'<h3>Data: '.$row['data'].' </h3>';
+			echo'<h3>Hora: '.$row['hora'].' </h3>';
+			echo'<h3>Local: '.$row['descricao'].' </h3>';
+			echo'<h3>Desricão: '.$row['local'].' </h3>';
+			echo'<h3>Latitude: '.$row['lat'].' </h3>';
+			echo'<h3>Longitude: '.$row['lon'].' </h3>';
+			echo'<p><a href="http://maps.google.com/maps?q='.$row['lat'].','.$row['lon'].'&ll='.$row['lat'].','.$row['lon'].'&z=17" data-role="button" data-ajax="false">Mostrar em google maps</a></p>';
+			if ($row['userid']!=$user_id){
+				echo '<div data-role="controlgroup">
+						<a href="index.html" data-role="button" data-ajax="false">Vou</a>
+						<a href="index.html" data-role="button" data-ajax="false">Não Vou</a>
+					</div>';
+			}else{
+				echo '<p><a href="criarEvento.php" data-role="button" data-ajax="false">Editar Evento</a></p>';
+				$sql2="SELECT * from convite where eventid='$eventid'";
+				$result2 = mysqli_query($link, $sql2);
+	
+				$num_rows2= mysqli_num_rows($result2);
+				if ($num_rows2>0){
+					echo '<table data-role="table" id="convidados" data-mode="reflow">';
+					echo '<tr>';
+					echo '<thead>';
+					echo '<th>Email</th>';
+					echo '<th>Estado</th>';
+					echo '<th>Eliminar convite</th>';
+					echo '</tr>';
+					echo '</thead>';
+					echo '<tbody>';
+						while($row2 = mysqli_fetch_array($result2)){
+							echo '<tr>';
+							echo '<td>'.$row['email'].'</td>';
+							echo '<td>'.$row['estado'].'</td>';
+							echo '<td><a href="eliminarconvite.php?conviteid='.$row['conviteid'].'" data-role="button" data-inline="true" data-ajax="false">Eliminar</a></td>';
+							echo'</tr>';
+					}
+					echo '</tbody>';
+				}else{
+					echo'Ainda não convidou ninguem';
+				}
+					
+				
+				
+				echo '<a href="#popupBasic" data-rel="popup" data-role="button">Convidar</a>
 
-		<div data-role="popup" data-corners="true" id="popupBasic">
-			<form action="convida.php">
-			email:<br>
-			<input type="text" name="email" ">
-			<br>
-			mensagem:<br>
-			<input type="text" name="mensagem" ">
-			<br><br>
-			<input type="submit" data-role="button" value="Convidar">
-			</form>
-		</div>
-		</div>
-        <div id="map_canvas" style="height:50%"></div>
+					<div data-role="popup" data-corners="true" id="popupBasic">
+						<form action="convida.php">
+						email:<br>
+						<input type="text" name="email" ">
+						<br>
+						mensagem:<br>
+						<input type="text" name="mensagem" ">
+						<br><br>
+						<input type="submit" data-role="button" value="Convidar">
+						</form>
+					</div>';
+				
+				
+			}
+		}else{
+			echo'evento não existente';
+		}
+		?>
+        
 		
       </div>
       <div data-theme="a" data-role="footer" data-position="fixed">
