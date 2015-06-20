@@ -57,7 +57,8 @@ if(isset($_SESSION['user_id'])){
 						<a href="index.html" data-role="button" data-ajax="false">Não Vou</a>
 					</div>';
 			}else{
-				echo '<p><a href="criarEvento.php" data-role="button" data-ajax="false">Editar Evento</a></p>';
+				echo '<p><a  href="criarEvento.php?eventid='.$eventid.'" data-role="button" data-ajax="false">Editar Evento</a></p>';
+				echo '<p><a  href="apagaevento.php?eventid='.$eventid.'" data-role="button" data-ajax="false" >Apagar Evento</a></p>';
 				$sql2="SELECT * from convite where eventid='$eventid'";
 				$result2 = mysqli_query($link, $sql2);
 	
@@ -88,7 +89,7 @@ if(isset($_SESSION['user_id'])){
 				
 				echo '<a href="#popupBasic" data-rel="popup" data-role="button">Convidar</a>
 
-					<div data-role="popup" data-corners="true" id="popupBasic">
+					<div data-role="popup" data-corners="true" id="popupBasic" style="padding:10px 20px;">
 						<form action="convida.php">
 						email:<br>
 						<input type="text" name="email" ">
