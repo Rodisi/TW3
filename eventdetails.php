@@ -77,7 +77,7 @@ if(isset($_SESSION['user_id'])){
 							echo '<tr>';
 							echo '<td>'.$row['email'].'</td>';
 							echo '<td>'.$row['estado'].'</td>';
-							echo '<td><a href="eliminarconvite.php?conviteid='.$row['conviteid'].'" data-role="button" data-inline="true" data-ajax="false">Eliminar</a></td>';
+							echo '<td><a href="eliminaconvite.php?conviteid='.$row['conviteid'].'" data-role="button" data-inline="true" data-ajax="false">Eliminar</a></td>';
 							echo'</tr>';
 					}
 					echo '</tbody>';
@@ -90,12 +90,13 @@ if(isset($_SESSION['user_id'])){
 				echo '<a href="#popupBasic" data-rel="popup" data-role="button">Convidar</a>
 
 					<div data-role="popup" data-corners="true" id="popupBasic" style="padding:10px 20px;">
-						<form action="convida.php">
+						<form action="convida.php" method="POST">
 						email:<br>
-						<input type="text" name="email" ">
+						<input type="text" name="email" >
 						<br>
 						mensagem:<br>
-						<input type="text" name="mensagem" ">
+						<input type="text" name="mensagem" >
+						<input type="hidden" name="eventid" value="'.$eventid.'" >
 						<br><br>
 						<input type="submit" data-role="button" value="Convidar">
 						</form>
