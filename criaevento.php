@@ -18,14 +18,27 @@ if(isset($_SESSION['user_id'])){
 	
 	include 'config.php';
 	
+	if(isset($_POST['eventid'])){
+	$eventid=$_POST['eventid'];
+	
+	$sql="UPDATE evento SET nome='$nomeEvento', data ='$data',hora='$hora',descricao='$descricao',lat='$lat',lon='$lon',local='$local' WHERE eventid='$eventid'";
+	$result=mysqli_query($link, $sql);
+	
+	//header("Location: userevents.php");
+	
+	
+}else{
+	
 	$sql="INSERT INTO evento (data, hora, descricao , nome ,lat , lon ,local ,userid) VALUES ('$data','$hora','$descricao','$nomeEvento','$lat','$lon','$local','$user_id')";
 	
 	$result=mysqli_query($link, $sql);
 	
-	header("Location: userpage.php");
+	header("Location: userevents.php");
+}
 
 	}else{
 	header("Location: index.php?err=1");
+	
 }
 	
 ?>

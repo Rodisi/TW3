@@ -62,12 +62,12 @@ $sql2="SELECT * FROM evento WHERE eventid = '$eventid'";
               mapTypeId: google.maps.MapTypeId.ROADMAP
            });
 		    google.maps.event.addListener(map, "click", function (e) {
-				//lat and lng is available in e object
-				var clicklatLng = e.latLng;
 				
-				  geocoder = new google.maps.Geocoder();
-				  geocoder.geocode({'latLng': latlng}, function(results, status) {
-					  alert("a");
+				var clicklatLng = e.latLng;
+				//alert(clicklatLng);
+				  var geocoder = new google.maps.Geocoder();
+				  geocoder.geocode({'latLng': clicklatLng}, function(results, status) {
+					  //alert(clicklatLng);
 					if (status == google.maps.GeocoderStatus.OK) {
 					  if (results[1]) {
 						marker = new google.maps.Marker({
@@ -119,7 +119,7 @@ $sql2="SELECT * FROM evento WHERE eventid = '$eventid'";
       <div data-role="content" id="content">
 		
 		
-        <form action="criaevento.php?eventid=" method="post" data-role="collapsible" data-ajax="false" id="over_map">
+        <form action="criaevento.php?eventid='$eventid'" method="post" data-role="collapsible" data-ajax="false" id="over_map">
           <h3>Dados evento</h3>
 		  <p>
             <label>Nome Evento</label>
