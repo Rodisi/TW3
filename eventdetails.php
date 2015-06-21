@@ -72,7 +72,7 @@ if(isset($_GET['conviteid'])){
 					echo'<a href="vou.php?conviteid='.$conviteid.'" data-role="button" data-ajax="false">Vou</a>';
 				}
 			}else{
-				echo '<p><a  href="criarEvento.php?eventid='.$eventid.'" data-role="button" data-ajax="false">Editar Evento</a></p>';
+				echo '<p><a  href="editarevento.php?eventid='.$eventid.'" data-role="button" data-ajax="false">Editar Evento</a></p>';
 				echo '<p><a  href="apagaevento.php?eventid='.$eventid.'" data-role="button" data-ajax="false" >Apagar Evento</a></p>';
 				$sql2="SELECT * from convite where eventid='$eventid'";
 				$result2 = mysqli_query($link, $sql2);

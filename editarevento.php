@@ -10,10 +10,25 @@ if(isset($_SESSION['user_id'])){
 }else{
 	header("Location: index.php?err=1");
 }
+if(isset($_GET['eventid'])){
+	$eventid=$_GET['eventid'];
+	
+}
+$sql2="SELECT * FROM evento WHERE eventid = '$eventid'";
+		$result2 = mysqli_query($link, $sql2);
+		$row2= mysqli_fetch_array($result2);
+		$lat = $row2['lat'];
+		$lon = $row2['lon'];
+		$nomeevento = $row2['nome'];
+		$data = $row2['data'];
+		$hora = $row2['hora'];
+		$descricao = $row2['descricao'];
+		$local = $row2['local'];
+	
 ?>
 <html>
     <head>
-    <title>Criar evento</title>
+    <title>Editar evento</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
     <style>
@@ -43,7 +58,7 @@ if(isset($_SESSION['user_id'])){
  
 			  map = new google.maps.Map(document.getElementById('map_canvas'), {
               zoom: minZoomLevel,
-              center: new google.maps.LatLng(38.50, -90.50),
+              center: new google.maps.LatLng(<?php echo $lat;?>, <?php echo $lon ;?>),
               mapTypeId: google.maps.MapTypeId.ROADMAP
            });
 		    google.maps.event.addListener(map, "click", function (e) {
@@ -52,6 +67,7 @@ if(isset($_SESSION['user_id'])){
 				
 				  geocoder = new google.maps.Geocoder();
 				  geocoder.geocode({'latLng': latlng}, function(results, status) {
+					  alert("a");
 					if (status == google.maps.GeocoderStatus.OK) {
 					  if (results[1]) {
 						marker = new google.maps.Marker({
@@ -77,59 +93,7 @@ if(isset($_SESSION['user_id'])){
 		   
 			
 			
-			var latlng = new google.maps.LatLng(lat,lon);
-			function sucesso(pos) {
-				var lat= pos.coords.latitude;
-				var lon= pos.coords.longitude;
-				var acc= pos.coords.accuracy;
-				var alt= pos.coords.altitude;
-				var altacc= pos.coords.altitudeAccuracy;
-				
-				var request = {
-				location: latlng = new google.maps.LatLng(lat,lon),
-				radius: 1000
-				};
-				$("#lat").val(lat);
-				$("#lon").val(lon);
-				
-				map.setCenter(latlng);
-				infowindow = new google.maps.InfoWindow();
-				var service = new google.maps.places.PlacesService(map);
-				service.nearbySearch(request, callback);
-				function callback(results, status) {
-				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					//("#local").val(results[0].name);
-					for (var i = 0; i < results.length; i++) {
-					createMarker(results[i]);
-							}
-						}
-					}
-				function createMarker(place) {
-				var placeLoc = place.geometry.location;
-			  var marker = new google.maps.Marker({
-				map: map,
-				position: place.geometry.location
-			  });
-
-			  google.maps.event.addListener(marker, 'click', function() {
-				infowindow.setContent(place.name);
-				infowindow.open(map, this);
-				$("#local").val(place.name);
-				$("#lat").val(place.geometry.location.lat());
-				$("#lon").val(place.geometry.location.lng());
-			  });
-			}
-			}
 			
-
-
-
-			function erro(){
-				alert("Ocorreu um erro");
-			}
-			options={timeout: 60000, enableHighAccuracy: true}
-			
-			navigator.geolocation.getCurrentPosition( sucesso, erro, options);
         });
  
         function getRealContentHeight() {
@@ -149,37 +113,39 @@ if(isset($_SESSION['user_id'])){
     <body>
     <div data-role="page" id="index">
       <div data-theme="a" data-role="header">
-        <h3> Criar Evento </h3>
+        <h3> Editar Evento </h3>
 		<?php include "session_nav.php"; ?>
       </div>
       <div data-role="content" id="content">
-        <form action="criaevento.php" method="post" data-role="collapsible" data-ajax="false" id="over_map">
+		
+		
+        <form action="criaevento.php?eventid=" method="post" data-role="collapsible" data-ajax="false" id="over_map">
           <h3>Dados evento</h3>
 		  <p>
             <label>Nome Evento</label>
-            <input type="text" name="nomeEvento" id="nomeEvento">
+            <input type="text" name="nomeEvento" id="nomeEvento" value="<?php echo $nomeevento;?>">
           </p>
 		  <p>
             <label>data</label>
-            <input type="date" data-role="date" data-inline="true" name="data" id="data">
+            <input type="date" data-role="date" data-inline="true" name="data" id="data" value="<?php echo $data;?>">
           </p>
 		  <p>
             <label>Hora</label>
-            <input type="time" name="hora" id="hora">
+            <input type="time" name="hora" id="hora" value="<?php echo $hora;?>">
           </p>
 		  <p>
             <label>Descricao</label>
-            <input type="text" name="descricao" id="descricao">
+            <input type="text" name="descricao" id="descricao" value="<?php echo $descricao;?>">
           </p>
           <p>
-            <input type="hidden" name="lat" id="lat">
+            <input type="hidden" name="lat" id="lat" value="<?php echo $lat;?>">
           </p>
           <p>
-            <input type="hidden" name="lon" id="lon">
+            <input type="hidden" name="lon" id="lon" value="<?php echo $lon;?>">
           </p>
           <p>
             <label>Local</label>
-            <input type="text" name="local" id="local">
+            <input type="text" name="local" id="local" value="<?php echo $local;?>">
           </p>
           <p>
             <input type="submit" value="GRAVAR">
