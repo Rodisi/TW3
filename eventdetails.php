@@ -48,8 +48,8 @@ if(isset($_GET['conviteid'])){
 			echo'<h2>'.$row['nome'].' </h2>';
 			echo'<h3>Data: '.$row['data'].' </h3>';
 			echo'<h3>Hora: '.$row['hora'].' </h3>';
-			echo'<h3>Local: '.$row['descricao'].' </h3>';
-			echo'<h3>Desricão: '.$row['local'].' </h3>';
+			echo'<h3>Local: '.$row['local'].' </h3>';
+			echo'<h3>Desricão: '.$row['descricao'].' </h3>';
 			echo'<h3>Latitude: '.$row['lat'].' </h3>';
 			echo'<h3>Longitude: '.$row['lon'].' </h3>';
 			echo'<p><a href="http://maps.google.com/maps?q='.$row['lat'].','.$row['lon'].'&ll='.$row['lat'].','.$row['lon'].'&z=17" data-role="button" data-ajax="false">Mostrar em google maps</a></p>';
@@ -103,7 +103,7 @@ if(isset($_GET['conviteid'])){
 				
 				echo '<a href="#popupBasic" data-rel="popup" data-role="button">Convidar</a>
 
-					<div data-role="popup" data-corners="true" id="popupBasic" style="padding:10px 20px;">
+					<div data-role="popup" data-corners="true" data-ajax="false" id="popupBasic" style="padding:10px 20px;">
 						<form action="convida.php" method="POST">
 						email:<br>
 						<input type="text" name="email" >
@@ -112,7 +112,7 @@ if(isset($_GET['conviteid'])){
 						<input type="text" name="mensagem" >
 						<input type="hidden" name="eventid" value="'.$eventid.'" >
 						<br><br>
-						<input type="submit" data-role="button" value="Convidar">
+						<input type="submit" data-role="button" data-ajax="false" value="Convidar">
 						</form>
 					</div>';
 				

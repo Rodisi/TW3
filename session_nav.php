@@ -14,7 +14,8 @@ $sql="select * from user where userid='$user_id'";
 	echo 'Bem-Vindo/a '.$nome;
 	
 	
-	echo '<br><a href="logout.php" data-role="button" data-inline="true">Logout</a>';
+	echo '<br><a href="logout.php" data-role="button" data-inline="true" data-ajax="false">Logout</a>';
+	echo'<a href="userpage.php" data-role="button" data-icon="home" data-iconpos="left" data-ajax="false">Home</a>';
 
 	}
 ?>
