@@ -64,23 +64,22 @@ if(isset($_SESSION['user_id'])){
 	
 				$num_rows2= mysqli_num_rows($result2);
 				if ($num_rows2>0){
-					echo '<table data-role="table" id="convidados" data-mode="reflow">';
-					echo '<tr>';
-					echo '<thead>';
-					echo '<th>Email</th>';
-					echo '<th>Estado</th>';
-					echo '<th>Eliminar convite</th>';
-					echo '</tr>';
-					echo '</thead>';
-					echo '<tbody>';
+					echo '<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">';
 						while($row2 = mysqli_fetch_array($result2)){
-							echo '<tr>';
-							echo '<td>'.$row['email'].'</td>';
-							echo '<td>'.$row['estado'].'</td>';
-							echo '<td><a href="eliminaconvite.php?conviteid='.$row['conviteid'].'" data-role="button" data-inline="true" data-ajax="false">Eliminar</a></td>';
-							echo'</tr>';
-					}
-					echo '</tbody>';
+							echo '<li>';
+							echo '<h2>'.$row2['email'].'<h2>';
+							if($row2['estado']==1){
+								echo '<p>Vai</p>';
+							}else if($row2['estado']==2){
+								echo '<p>Não vai</p>';
+							} else {
+								echo '<p>Não decidiu ainda</p>';
+							}
+							//echo '<a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">eliminar</a>';
+							echo '<a href="eliminaconvite.php?conviteid='.$row2['conviteid'].'" data-role="button" data-inline="true" data-ajax="false">Eliminar</a>';
+							echo'</li>';
+						}
+						echo'</ul>';
 				}else{
 					echo'Ainda não convidou ninguem';
 				}

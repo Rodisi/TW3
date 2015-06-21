@@ -18,6 +18,7 @@ if(isset($_SESSION['user_id'])){
 	
 	$result=mysqli_query($link, $sql);
 	
+	//header("location:javascript://history.go(-1)");
 	header("Location: userpage.php");
 
 	}else{
