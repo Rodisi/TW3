@@ -27,8 +27,11 @@ if(isset($_SESSION['user_id'])){
       </div>
       
 	  <?php
-		$user_id=$_SESSION['user_id'];
-		$sql="SELECT * FROM convite INNER JOIN user ON user.email = convite.email ORDER BY convite.eventid";
+		$sql2="SELECT email FROM user WHERE userid = '$user_id'";
+		$result2 = mysqli_query($link, $sql2);
+		$row2 = mysqli_fetch_array($result2);
+		$useremail=$row2['email'];
+		$sql="SELECT * FROM convite INNER JOIN user ON user.email = convite.email AND '$useremail' = convite.email ";
 
 		$result = mysqli_query($link, $sql);
 	
@@ -39,6 +42,7 @@ if(isset($_SESSION['user_id'])){
 			
 			while($row = mysqli_fetch_array($result)){
 				$evento=$row['eventid'];
+				$conviteid=$row['conviteid'];
 				$sql2="SELECT * from evento where eventid='$evento'";
 
 				$result2 = mysqli_query($link, $sql2);
@@ -46,7 +50,7 @@ if(isset($_SESSION['user_id'])){
 				$row2 = mysqli_fetch_array($result2);
 				
 				echo'<li>';
-						echo'<a href="eventdetails.php?eventid='.$evento.'" data-ajax="false">';
+						echo'<a href="eventdetails.php?eventid='.$evento.'&conviteid='.$conviteid.'" data-ajax="false">';
 						echo'<h2>'.$row2['nome'].' </h2>';
 						echo'<h3>'.$row2['local'].' </h3>';
 						echo'<h3>'.$row['mensagem'].' </h3>';

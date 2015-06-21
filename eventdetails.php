@@ -6,14 +6,16 @@ include 'config.php';
 if(isset($_SESSION['user_id'])){
 	
 	$user_id=$_SESSION['user_id'];
-	
-}else{
-	header("Location: index.php?err=1");
 }
+	
+
+if(isset($_GET['conviteid'])){
+		$conviteid=$_GET['conviteid'];
+	} 
 ?>
 <html>
     <head>
-    <title>Criar evento</title>
+    <title>Detalhes Evento</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
     <style>
@@ -53,8 +55,8 @@ if(isset($_SESSION['user_id'])){
 			echo'<p><a href="http://maps.google.com/maps?q='.$row['lat'].','.$row['lon'].'&ll='.$row['lat'].','.$row['lon'].'&z=17" data-role="button" data-ajax="false">Mostrar em google maps</a></p>';
 			if ($row['userid']!=$user_id){
 				echo '<div data-role="controlgroup">
-						<a href="index.html" data-role="button" data-ajax="false">Vou</a>
-						<a href="index.html" data-role="button" data-ajax="false">Não Vou</a>
+						<a href="vou.php?conviteid='.$conviteid.'"" data-role="button" data-ajax="false">Vou</a>
+						<a href="naovou.php"conviteid='.$conviteid.'" data-role="button" data-ajax="false">Não Vou</a>
 					</div>';
 			}else{
 				echo '<p><a  href="criarEvento.php?eventid='.$eventid.'" data-role="button" data-ajax="false">Editar Evento</a></p>';
