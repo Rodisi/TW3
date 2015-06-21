@@ -54,10 +54,23 @@ if(isset($_GET['conviteid'])){
 			echo'<h3>Longitude: '.$row['lon'].' </h3>';
 			echo'<p><a href="http://maps.google.com/maps?q='.$row['lat'].','.$row['lon'].'&ll='.$row['lat'].','.$row['lon'].'&z=17" data-role="button" data-ajax="false">Mostrar em google maps</a></p>';
 			if ($row['userid']!=$user_id){
-				echo '<div data-role="controlgroup">
-						<a href="vou.php?conviteid='.$conviteid.'"" data-role="button" data-ajax="false">Vou</a>
-						<a href="naovou.php"conviteid='.$conviteid.'" data-role="button" data-ajax="false">Não Vou</a>
-					</div>';
+				$sql2="SELECT * from convite where conviteid='$conviteid'";
+				$result2 = mysqli_query($link, $sql2);
+				$row2 =mysqli_fetch_array($result2);
+				$estado=$row2['estado'];
+				if($estado==0){
+					echo'<h3> Indeciso </h3>';
+					echo '<div data-role="controlgroup">
+							<a href="vou.php?conviteid='.$conviteid.'"" data-role="button" data-ajax="false">Vou</a>
+							<a href="naovou.php?conviteid='.$conviteid.'" data-role="button" data-ajax="false">Não Vou</a>
+						</div>';
+				}else if($estado==1){
+					echo'<h3> Vou </h3>';
+					echo'<a href="naovou.php?conviteid='.$conviteid.'" data-role="button" data-ajax="false">Não Vou</a>';
+				} else {
+					echo'<h3> Nao Vou </h3>';
+					echo'<a href="vou.php?conviteid='.$conviteid.'" data-role="button" data-ajax="false">Vou</a>';
+				}
 			}else{
 				echo '<p><a  href="criarEvento.php?eventid='.$eventid.'" data-role="button" data-ajax="false">Editar Evento</a></p>';
 				echo '<p><a  href="apagaevento.php?eventid='.$eventid.'" data-role="button" data-ajax="false" >Apagar Evento</a></p>';
