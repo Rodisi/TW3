@@ -24,7 +24,7 @@ if(isset($_SESSION['user_id'])){
 	$sql="UPDATE evento SET nome='$nomeEvento', data ='$data',hora='$hora',descricao='$descricao',lat='$lat',lon='$lon',local='$local' WHERE eventid='$eventid'";
 	$result=mysqli_query($link, $sql);
 	
-	//header("Location: userevents.php");
+	header("Location: userevents.php");
 	
 	
 }else{

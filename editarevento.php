@@ -119,7 +119,7 @@ $sql2="SELECT * FROM evento WHERE eventid = '$eventid'";
       <div data-role="content" id="content">
 		
 		
-        <form action="criaevento.php?eventid='$eventid'" method="post" data-role="collapsible" data-ajax="false" id="over_map">
+        <form action="criaevento.php" method="post" data-role="collapsible" data-ajax="false" id="over_map">
           <h3>Dados evento</h3>
 		  <p>
             <label>Nome Evento</label>
@@ -142,6 +142,9 @@ $sql2="SELECT * FROM evento WHERE eventid = '$eventid'";
           </p>
           <p>
             <input type="hidden" name="lon" id="lon" value="<?php echo $lon;?>">
+          </p>
+		  <p>
+            <input type="hidden" name="eventid" id="eventid" value="<?php echo $eventid;?>">
           </p>
           <p>
             <label>Local</label>
