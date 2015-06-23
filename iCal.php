@@ -7,19 +7,19 @@
 //$meeting_name is the name of your meeting
 //$meeting_duretion is the duration of your meeting in seconds (3600 = 1 hour)
 
-function sendIcalEmail($firstname,$lastname,$email,$meeting_date,$meeting_name,$meeting_duration) {
+function sendIcalEmail($email,$meeting_date,$meeting_name,$descricao,$conviteid,$mensagem,$local) {
 
 	$from_name = "My Name";
-	$from_address = "myname@mydomain.com";
-	$subject = "Meeting Booking"; //Doubles as email subject and meeting subject in calendar
-	$meeting_description = "Here is a brief description of my meeting\n\n";
-	$meeting_location = "My Office"; //Where will your meeting take place
+	$from_address = "brunomarques87@gmail.com";
+	$subject = "Convite para Evento"; //Doubles as email subject and meeting subject in calendar
+	$meeting_description = $descricao."\n\n";
+	$meeting_location = $local; //Where will your meeting take place
 	
 	
 	//Convert MYSQL datetime and construct iCal start, end and issue dates
 	$meetingstamp = strtotime($meeting_date . " UTC");    
 	$dtstart= gmdate("Ymd\THis\Z",$meetingstamp);
-	$dtend= gmdate("Ymd\THis\Z",$meetingstamp+$meeting_duration);
+	//$dtend= gmdate("Ymd\THis\Z",$meetingstamp+$meeting_duration);
 	$todaystamp = gmdate("Ymd\THis\Z");
 	
 	//Create unique identifier
@@ -43,8 +43,12 @@ function sendIcalEmail($firstname,$lastname,$email,$meeting_date,$meeting_name,$
 	
 	$message .= "<html>\n";
 	$message .= "<body>\n";
-	$message .= '<p>Dear '.$firstname.' '.$lastname.',</p>';
-	$message .= '<p>Here is my HTML Email / Used for Meeting Description</p>';    
+	$message .= '<p>Dear ,</p>';
+	$message .= '<p>Foi convidado para um evento</p>';
+	$message .= '<p>local '.$local.'</p>';
+	$message .= '<p>descricao '.$descricao.'</p>';
+	$message .= '<a href="vou.php?conviteid='.$conviteid.'"></a>';
+	$message .= '<a href="naovou.php?conviteid='.$conviteid.'"></a>';
 	$message .= "</body>\n";
 	$message .= "</html>\n";
 	$message .= "--$mime_boundary\n";
@@ -57,7 +61,6 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 ORGANIZER:MAILTO:'.$from_address.'
 DTSTART:'.$dtstart.'
-DTEND:'.$dtend.'
 LOCATION:'.$meeting_location.'
 TRANSP:OPAQUE
 SEQUENCE:0

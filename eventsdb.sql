@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2015 at 03:45 PM
+-- Generation Time: Jun 23, 2015 at 10:21 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -33,7 +33,17 @@ CREATE TABLE IF NOT EXISTS `convite` (
   `estado` int(1) NOT NULL,
   `mensagem` varchar(512) NOT NULL,
   PRIMARY KEY (`conviteid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `convite`
+--
+
+INSERT INTO `convite` (`conviteid`, `eventid`, `email`, `estado`, `mensagem`) VALUES
+(13, 8, '123@hotmail.com', 1, 'fdaa'),
+(15, 9, '123@hotmail.com', 1, 'dssd'),
+(16, 8, '789@gmail.com', 0, 'fsdds'),
+(25, 7, 'brunomarques87@gmail.com', 0, '1212');
 
 -- --------------------------------------------------------
 
@@ -52,17 +62,17 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `lat` varchar(32) NOT NULL,
   `lon` varchar(32) NOT NULL,
   PRIMARY KEY (`eventid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `evento`
 --
 
 INSERT INTO `evento` (`eventid`, `userid`, `nome`, `descricao`, `data`, `hora`, `local`, `lat`, `lon`) VALUES
-(1, 1, 'aaa', 'sas', '2015-11-12', '18:30', 'UAL - Universidade Autónoma de Lisboa', '38.724476', '-9.14570900000001'),
-(2, 1, 'dfdfdf', 'asfdasfdfdsf', '2015-06-26', '19:30', 'sasasasas', '38.722252399999995', '-9.1393366'),
-(3, 1, 'sasas', 'bvbvbv', '2016-12-11', '19:03', 'Energias de Portugal', '38.72592', '-9.149226999999996'),
-(4, 1, 'fgfgfg', 'hfhfhh', '2078-11-12', '20:11', 'Castle of S. Jorge', '38.713909', '-9.133475999999973');
+(7, 2, 'sss', 'klkt', '4444-05-04', '04:54', 'Amadora, Portugal', '38.743184720570746', '-9.208109378814697'),
+(8, 1, 'asasas', 'gdsfv dsfdff', '2020-11-12', '14:14', 'Escola Básica Serra das Minas nº 2', '38.786714', '-9.332509999999957'),
+(9, 1, 'sasdddddddaaaaaaddddd', 'hghg', '2016-07-21', '14:11', 'Amadora, Portugal', '38.75228021318804', '-9.216842651367188'),
+(11, 1, 'fggfgfg', '1112121212', '2015-11-11', '11:11', 'Externato GrÃ£o Vasco', '38.749876', '-9.203392000000008');
 
 -- --------------------------------------------------------
 
@@ -76,14 +86,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(80) NOT NULL,
   `pass` varchar(32) NOT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`userid`, `nome`, `email`, `pass`) VALUES
-(1, 'bruno', 'brunomarques87@gmail.com', '121187');
+(1, 'bruno', 'brunomarques87@gmail.com', '121187'),
+(2, '123', '123@hotmail.com', '123');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
