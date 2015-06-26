@@ -25,8 +25,6 @@ if(isset($_GET['conviteid'])){
 </style>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     </head>
     <body>
     <div data-role="page" id="index">
@@ -73,7 +71,17 @@ if(isset($_GET['conviteid'])){
 				}
 			}else{
 				echo '<p><a  href="editarevento.php?eventid='.$eventid.'" data-role="button" data-ajax="false">Editar Evento</a></p>';
-				echo '<p><a  href="apagaevento.php?eventid='.$eventid.'" data-role="button" data-ajax="false" >Apagar Evento</a></p>';
+				echo '<a href="#apagaeventoDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="false" data-transition="pop" data-icon="delete" data-theme="b">Apagar Evento</a> ';
+				echo '<div data-role="popup" id="apagaeventoDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+					<div data-role="header" data-theme="a" class="ui-corner-top">
+						<h1>Apagar Evento?</h1>
+					</div>
+					<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+						<h3 class="ui-title">Tem a certeza?</h3>
+						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+						<a href="apagaevento.php?eventid='.$eventid.'" data-role="button" data-inline="true" data-ajax="false" data-transition="flow" data-theme="b">Delete</a>
+					</div>
+				</div> ';
 				$sql2="SELECT * from convite where eventid='$eventid'";
 				$result2 = mysqli_query($link, $sql2);
 	
@@ -104,7 +112,7 @@ if(isset($_GET['conviteid'])){
 				echo '<a href="#popupBasic" data-rel="popup" data-role="button">Convidar</a>
 
 					<div data-role="popup" data-corners="true" data-ajax="false" id="popupBasic" style="padding:10px 20px;">
-						<form action="convida.php" method="POST">
+						<form action="convida.php" data-ajax="false" method="POST">
 						email:<br>
 						<input type="text" name="email" >
 						<br>
