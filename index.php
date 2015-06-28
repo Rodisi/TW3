@@ -6,6 +6,9 @@ if(isset($_SESSION['user_id'])){
 	
 	header("Location: userpage.php");
 }
+if (isset($_GET['err'])){
+	$err=$_GET['err'];
+}
 ?>
 <html>
     <head>
@@ -14,7 +17,13 @@ if(isset($_SESSION['user_id'])){
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-
+	
+	<script>
+		var erro = <?php echo $err ?>;
+		if (erro==1){
+			alert('erro login')
+		}
+	</script>
 	
       <div  data-role="header">
         <h3> Login </h3>
