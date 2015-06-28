@@ -26,8 +26,8 @@ if(isset($_SESSION['user_id'])){
 	$data = $row['data'];
 	$hora = $row['hora'];
 	$descricao =$row['descricao'];
-	$nomeEvento = $row['nome;'];
-	$combinedDT = date('Y-m-d H:i:s', strtotime("$data $hora"));
+	$nomeEvento = $row['nome'];
+	$meeting_date = date('Y-m-d H:i:s', strtotime("$data $hora"));
 	
 	$result2 =sendIcalEmail($email,$meeting_date,$nomeEvento,$descricao,$conviteid,$mensagem,$local);
 	if($result2) {

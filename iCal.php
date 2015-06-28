@@ -10,7 +10,7 @@
 function sendIcalEmail($email,$meeting_date,$meeting_name,$descricao,$conviteid,$mensagem,$local) {
 
 	$from_name = "My Name";
-	$from_address = "brunomarques87@gmail.com";
+	$from_address = "bruno@127.0.0.1";
 	$subject = "Convite para Evento"; //Doubles as email subject and meeting subject in calendar
 	$meeting_description = $descricao."\n\n";
 	$meeting_location = $local; //Where will your meeting take place
@@ -23,7 +23,7 @@ function sendIcalEmail($email,$meeting_date,$meeting_name,$descricao,$conviteid,
 	$todaystamp = gmdate("Ymd\THis\Z");
 	
 	//Create unique identifier
-	$cal_uid = date('Ymd').'T'.date('His')."-".rand()."@mydomain.com";
+	$cal_uid = date('Ymd').'T'.date('His')."-".rand()."@127.0.0.1";
 	
 	//Create Mime Boundry
 	$mime_boundary = "----Meeting Booking----".md5(time());
@@ -37,7 +37,7 @@ function sendIcalEmail($email,$meeting_date,$meeting_name,$descricao,$conviteid,
 	$headers .= "Content-class: urn:content-classes:calendarmessage\n";
 	
 	//Create Email Body (HTML)
-	$message .= "--$mime_boundary\n";
+	$message = "--$mime_boundary\n";
 	$message .= "Content-Type: text/html; charset=UTF-8\n";
 	$message .= "Content-Transfer-Encoding: 8bit\n\n";
 	
