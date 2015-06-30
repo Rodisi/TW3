@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2015 at 10:21 PM
+-- Generation Time: Jun 30, 2015 at 01:36 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `convite` (
   `estado` int(1) NOT NULL,
   `mensagem` varchar(512) NOT NULL,
   PRIMARY KEY (`conviteid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `convite`
@@ -43,7 +43,7 @@ INSERT INTO `convite` (`conviteid`, `eventid`, `email`, `estado`, `mensagem`) VA
 (13, 8, '123@hotmail.com', 1, 'fdaa'),
 (15, 9, '123@hotmail.com', 1, 'dssd'),
 (16, 8, '789@gmail.com', 0, 'fsdds'),
-(25, 7, 'brunomarques87@gmail.com', 0, '1212');
+(36, 14, 'brunomarques87@gmail.com', 0, 'sdfsdf');
 
 -- --------------------------------------------------------
 
@@ -62,17 +62,18 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `lat` varchar(32) NOT NULL,
   `lon` varchar(32) NOT NULL,
   PRIMARY KEY (`eventid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `evento`
 --
 
 INSERT INTO `evento` (`eventid`, `userid`, `nome`, `descricao`, `data`, `hora`, `local`, `lat`, `lon`) VALUES
-(7, 2, 'sss', 'klkt', '4444-05-04', '04:54', 'Amadora, Portugal', '38.743184720570746', '-9.208109378814697'),
-(8, 1, 'asasas', 'gdsfv dsfdff', '2020-11-12', '14:14', 'Escola Básica Serra das Minas nº 2', '38.786714', '-9.332509999999957'),
-(9, 1, 'sasdddddddaaaaaaddddd', 'hghg', '2016-07-21', '14:11', 'Amadora, Portugal', '38.75228021318804', '-9.216842651367188'),
-(11, 1, 'fggfgfg', '1112121212', '2015-11-11', '11:11', 'Externato GrÃ£o Vasco', '38.749876', '-9.203392000000008');
+(8, 1, 'asasas', 'gdsfv dsfdff', '2020-11-12', '14:14', 'AlgueirÃ£o-Mem Martins, Portugal', '38.79161093673066', '-9.341983795166016'),
+(9, 1, 'sasddddddd', 'hghgfdgdfgdfg', '2016-07-21', '14:11', 'Amadora, Portugal', '38.75340974729409', '-9.222099781036377'),
+(11, 1, 'fggfgfg', '23', '2015-11-11', '11:11', 'Lisbon, Portugal', '38.75121759812029', '-9.204998016357422'),
+(13, 1, 'gfgfg', 'gfgfgfg', '2015-09-21', '15:05', 'fgfgfgfgfg', '', ''),
+(14, 2, 'asasas', 'vccvbcvb', '2015-11-12', '14:00', 'AgÃªncia Nacional de InovaÃ§Ã£o', '38.771994', '-9.180686000000037');
 
 -- --------------------------------------------------------
 
